@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from 'cookie-parser';
@@ -13,7 +12,7 @@ class App {
   constructor(controllers: Controller[]) {
     this.app = express();
 
-    this.connectToTheDatabase();
+    // this.connectToTheDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
     this.initializeErrorHandling();
@@ -40,14 +39,14 @@ class App {
     })
   }
 
-  private async connectToTheDatabase() {
-    await mongoose.connect(process.env.MONGO_PATH, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true
-    });
-  }
+  // private async connectToTheDatabase() {
+  //   await mongoose.connect(process.env.MONGO_PATH, {
+  //     useNewUrlParser: true,
+  //     useUnifiedTopology: true,
+  //     useFindAndModify: false,
+  //     useCreateIndex: true
+  //   });
+  // }
 }
 
 export default App;

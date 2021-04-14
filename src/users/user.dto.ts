@@ -1,12 +1,9 @@
 import { IsOptional, IsString, ValidateNested } from "class-validator";
-import CreateAddressDto from "./address.dto";
+import CreateAddressDto from "../address/address.dto";
 
 class CreateUserDto {
   @IsString()
-  public firstName: string;
-
-  @IsString()
-  public lastName: string;
+  public fullName: string;
 
   @IsString()
   public email: string;

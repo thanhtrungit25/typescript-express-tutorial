@@ -1,17 +1,37 @@
+import 'reflect-metadata';
 import 'dotenv/config';
 import App from './app';
+import config from './ormconfig';
+import { createConnection } from 'typeorm';
+
 import PostsController from './posts/posts.controller';
-import UsersController from './users/user.controller';
+// import UsersController from './users/user.controller';
 import AuthenticationController from './authentication/authentication.controller';
-import ReportsController from './reports/reports.controller';
+// import ReportsController from './reports/reports.controller';
 
-const app = new App(
-  [
-    new PostsController(),
-    new UsersController(),
-    new ReportsController(),
-    new AuthenticationController(),
-  ]
-);
+// const app = new App(
+//   [
+//     new PostsController(),
+//     new UsersController(),
+//     new ReportsController(),
+//     new AuthenticationController(),
+//   ]
+// );
 
-app.listen();
+// app.listen();
+
+(async () => {
+  try {
+    await createConnection(config);
+  } catch (error) {
+    console.log('Error while connecting to the database', error);
+    return error;
+  }
+  const app = new App(
+    [
+      new PostsController(),
+      new AuthenticationController(),
+    ],
+  );
+  app.listen();
+})();
