@@ -3,6 +3,7 @@ import PostNotFoundException from '../exceptions/PostNotFoundException';
 import validationMiddleware from '../middleware/validation.middleware';
 import Controller from '../interfaces/controller.interface';
 import RequestWithUser from '../interfaces/requestWithUser.interface';
+import authMiddleware from '../middleware/auth.middleware';
 import CreatePostDto from './post.dto';
 import { getRepository } from 'typeorm';
 import Post from './post.entity'
@@ -24,7 +25,7 @@ class PostsController implements Controller {
     this.router
       .patch(`${this.path}/:id`, this.modifyPost)
       .delete(`${this.path}/:id`, this.deletePost)
-      .post(this.path, validationMiddleware(CreatePostDto), this.createPost);
+      .post(this.path, authMiddleware, validationMiddleware(CreatePostDto), this.createPost);
   }
 
   private getAllPosts = async (req: Request, res: Response) => {
@@ -33,10 +34,14 @@ class PostsController implements Controller {
   }
 
   private createPost = async (req: RequestWithUser, res: Response) => {
-   const postData: CreatePostDto = req.body;
-   const newPost = this.postRepository.create(postData);
-   await this.postRepository.save(newPost);
-   res.send(newPost);
+    const postData: CreatePostDto = req.body;
+    const newPost = this.postRepository.create({
+      ...postData,
+      author: req.user,
+    });
+    await this.postRepository.save(newPost);
+    newPost.author = undefined;
+    res.send(newPost);
   }
 
   private getPostById = async (req: Request, res: Response, next: NextFunction) => {
