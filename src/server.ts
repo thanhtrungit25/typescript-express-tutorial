@@ -5,6 +5,7 @@ import config from './ormconfig';
 import { createConnection } from 'typeorm';
 
 import PostsController from './posts/posts.controller';
+import CategoryController from './category/category.controller';
 // import UsersController from './users/user.controller';
 import AuthenticationController from './authentication/authentication.controller';
 // import ReportsController from './reports/reports.controller';
@@ -31,6 +32,7 @@ import AuthenticationController from './authentication/authentication.controller
     [
       new PostsController(),
       new AuthenticationController(),
+      new CategoryController(),
     ],
   );
   app.listen();
