@@ -6,15 +6,16 @@ import validationMiddleware from '../middleware/validation.middleware';
 import CreateUserDto from '../users/user.dto';
 import LogInDto from '../users/login.dto';
 import WrongCredentialException from '../exceptions/WrongCredentialException';
-import UserWithThatEmailAlreadyExistsException from '../exceptions/UserWithThatEmailAlreadyExistsException';
 import TokenData from '../interfaces/tokenData.interface'
 import DataStoredInToken from '../interfaces/dataStoredInToken';
 import User from '../users/user.entity';
 import { getRepository } from 'typeorm';
+import AuthenticationService from './authentication.service';
 class AuthenticationController implements Controller {
   public path = '/auth';
   public router = express.Router();
   private UserRepository = getRepository(User);
+  private authenticationService = new AuthenticationService();
   
   constructor() {
     this.initRoutes();
@@ -28,26 +29,16 @@ class AuthenticationController implements Controller {
 
   private registration = async (req: Request, res: Response, next: NextFunction) => {
     const userData: CreateUserDto = req.body;
-    if (
-      await this.UserRepository.findOne({ email: userData.email })
-    ) {
-      next(new UserWithThatEmailAlreadyExistsException(userData.email))
-    } else {
-      try {
-        const hashedPassword = await bcrypt.hash(userData.password, 10);
-        const user = this.UserRepository.create({
-          ...userData,
-          password: hashedPassword,
-        });
-        await this.UserRepository.save(user);
+    try {
+      const {
+        cookie,
+        user,
+      } = await this.authenticationService.register(userData);
 
-        user.password = undefined;
-        const tokenData = this.createToken(user);
-        res.setHeader('Set-Cookie', [this.createCookie(tokenData)])
-        res.send(user);
-      } catch (error) {
-        console.log(error.message);
-      }
+      res.setHeader('Set-Cookie', [cookie])
+      res.send(user);
+    } catch (error) {
+      next(error);
     }
   }
 

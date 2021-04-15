@@ -39,6 +39,10 @@ class App {
     })
   }
 
+  public getServer() {
+    return this.app;
+  }
+
   // private async connectToTheDatabase() {
   //   await mongoose.connect(process.env.MONGO_PATH, {
   //     useNewUrlParser: true,
