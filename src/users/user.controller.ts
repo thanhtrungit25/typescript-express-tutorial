@@ -1,11 +1,11 @@
-import express, { NextFunction, Request, Response } from "express";
-import NotAuthorizedException from "../exceptions/NotAuthorizedException";
-import UserNotFoundException from "../exceptions/UserNotFoundException";
-import RequestWithUser from "../interfaces/requestWithUser.interface";
-import Controller from "../interfaces/controller.interface";
-import postModel from "../posts/post.model";
-import userModel from "./user.model";
-import authMiddleware from "../middleware/auth.middleware";
+import express, { NextFunction, Request, Response } from 'express';
+import NotAuthorizedException from '../exceptions/NotAuthorizedException';
+import UserNotFoundException from '../exceptions/UserNotFoundException';
+import RequestWithUser from '../interfaces/requestWithUser.interface';
+import Controller from '../interfaces/controller.interface';
+import postModel from '../posts/post.model';
+import userModel from './user.model';
+import authMiddleware from '../middleware/auth.middleware';
 
 class UsersController implements Controller {
   public path = '/users';
@@ -18,8 +18,8 @@ class UsersController implements Controller {
   }
 
   public initRoutes() {
-    this.router.get(`${this.path}/:id`, authMiddleware, this.getUserById);    
-    this.router.get(`${this.path}/:id/posts`, authMiddleware, this.getAllPostsOfUser);    
+    this.router.get(`${this.path}/:id`, authMiddleware, this.getUserById);
+    this.router.get(`${this.path}/:id/posts`, authMiddleware, this.getAllPostsOfUser);
   }
 
   private getUserById = async (req: Request, res: Response, next: NextFunction) => {

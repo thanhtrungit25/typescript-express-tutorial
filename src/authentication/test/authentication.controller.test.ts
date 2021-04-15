@@ -32,10 +32,10 @@ describe('The AuthenticationController', () => {
         return request(app.getServer())
           .post(`${authenticationController.path}/register`)
           .send(userData)
-          .expect('Set-Cookie', /^Authorization=.+/)
+          .expect('Set-Cookie', /^Authorization=.+/);
       });
     });
-    
+
   });
-  
+
 });

@@ -1,4 +1,4 @@
-import { IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsNumber, IsString, ValidateNested } from 'class-validator';
 
 class CategoryInPostDto {
   @IsNumber()

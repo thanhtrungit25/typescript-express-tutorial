@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import Controller from '../interfaces/controller.interface';
-import userModel from "../users/user.model";
+import userModel from '../users/user.model';
 
 class ReportsController implements Controller {
   public path = '/reports';
@@ -12,7 +12,7 @@ class ReportsController implements Controller {
   }
 
   public initRoutes() {
-    this.router.get(`${this.path}`, this.generateReport);    
+    this.router.get(`${this.path}`, this.generateReport);
   }
 
   private generateReport = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,16 +28,16 @@ class ReportsController implements Controller {
         {
           $group: {
             _id: {
-              country: '$address.country'
+              country: '$address.country',
             },
             users: {
               $push: {
-                _id: '$_id'
-              }
+                _id: '$_id',
+              },
             },
             count: {
               $sum: 1,
-            }
+            },
           },
         },
         {
@@ -46,15 +46,15 @@ class ReportsController implements Controller {
             localField: 'users._id',
             foreignField: '_id',
             as: 'users',
-          }
-        }
+          },
+        },
       ],
     );
 
     res.send({
-      usersByContries
+      usersByContries,
     });
-  };
+  }
 }
 
 export default ReportsController;

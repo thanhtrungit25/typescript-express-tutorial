@@ -6,13 +6,12 @@ import RequestWithUser from '../interfaces/requestWithUser.interface';
 import authMiddleware from '../middleware/auth.middleware';
 import CreatePostDto from './post.dto';
 import { getRepository } from 'typeorm';
-import Post from './post.entity'
+import Post from './post.entity';
 
 class PostsController implements Controller {
   public path = '/posts';
   public router = express.Router();
   private postRepository = getRepository(Post);
-
 
   constructor() {
     this.initRoutes();
@@ -50,8 +49,8 @@ class PostsController implements Controller {
     if (post) {
       res.send(post);
     } else {
-      next(new PostNotFoundException(id))
-    }  
+      next(new PostNotFoundException(id));
+    }
   }
 
   private modifyPost = async (req: Request, res: Response, next: NextFunction) => {
@@ -62,19 +61,19 @@ class PostsController implements Controller {
     if (updatedPost) {
       res.send(updatedPost);
     } else {
-      next(new PostNotFoundException(id))
-    }  
+      next(new PostNotFoundException(id));
+    }
   }
 
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    const deleteReponse = await this.postRepository.delete(id)
+    const deleteReponse = await this.postRepository.delete(id);
     console.log(deleteReponse);
     if (deleteReponse.affected) {
       res.sendStatus(200);
     } else {
-      next(new PostNotFoundException(id))
-    }  
+      next(new PostNotFoundException(id));
+    }
   }
 }
 

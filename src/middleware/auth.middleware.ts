@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { NextFunction, Response } from "express";
+import { NextFunction, Response } from 'express';
 import DataStoredInToken from 'interfaces/dataStoredInToken';
 import RequestWithUser from 'interfaces/requestWithUser.interface';
 import WrongAuthenticationTokenException from '../exceptions/WrongAuthenticationTokenException';
@@ -26,7 +26,7 @@ async function authMiddleware(req: RequestWithUser, res: Response, next: NextFun
       next(new WrongAuthenticationTokenException());
     }
   } else {
-    next(new AuthenticationTokenMissingException);
+    next(new AuthenticationTokenMissingException());
   }
 }
 

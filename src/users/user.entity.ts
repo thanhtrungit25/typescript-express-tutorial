@@ -1,6 +1,6 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import Address from "../address/address.entity";
-import Post from "../posts/post.entity";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import Address from '../address/address.entity';
+import Post from '../posts/post.entity';
 
 @Entity()
 class User {

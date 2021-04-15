@@ -6,7 +6,7 @@ interface User {
   address?: {
     street: string;
     city: string;
-  }
+  };
 }
 
 export default User;

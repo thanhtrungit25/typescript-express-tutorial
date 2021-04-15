@@ -5,7 +5,7 @@ const addressSchema = new mongoose.Schema({
   city: String,
   country: String,
   street: String,
-})
+});
 
 const userSchema = new mongoose.Schema(
   {
@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema(
     toJSON: {
       virtuals: true,
       getters: true,
-    }
-  }
+    },
+  },
 );
 
-userSchema.virtual('fullName').get(function() {
+userSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
@@ -35,7 +35,7 @@ userSchema.virtual('posts', {
   localField: '_id',
   foreignField: 'author',
 });
- 
+
 const userModel = mongoose.model<User & mongoose.Document>('User', userSchema);
- 
+
 export default userModel;

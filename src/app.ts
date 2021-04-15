@@ -1,9 +1,9 @@
-import express from "express";
-import bodyParser from "body-parser";
+import express from 'express';
+import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
-import Controller from "./interfaces/controller.interface";
-import errorMiddleware from "./middleware/error.middleware";
+import Controller from './interfaces/controller.interface';
+import errorMiddleware from './middleware/error.middleware';
 
 class App {
   public app: express.Application;
@@ -24,9 +24,7 @@ class App {
   }
 
   private initializeControllers(controllers) {
-    controllers.forEach(controller => {
-      this.app.use('/', controller.router);
-    });
+    controllers.forEach(controller => this.app.use('/', controller.router));
   }
 
   private initializeErrorHandling() {
@@ -34,9 +32,9 @@ class App {
   }
 
   public listen() {
-    this.app.listen(process.env.PORT, function() {
+    this.app.listen(process.env.PORT, () => {
       console.log(`App listening on the port ${process.env.PORT}`);
-    })
+    });
   }
 
   public getServer() {

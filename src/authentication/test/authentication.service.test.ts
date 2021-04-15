@@ -10,12 +10,12 @@ describe('The AuthenticationSerivie', () => {
   describe('when creating a cookie', () => {
     it('Should return a string', () => {
       const tokenData: TokenData = {
-        token: "",
+        token: '',
         expiresIn: 1,
       };
       (typeorm as any).getRepository.mockReturnValue({});
       const authenticationService = new AuthenticatonService();
-      expect(typeof authenticationService.createCookie(tokenData)).toEqual('string')
+      expect(typeof authenticationService.createCookie(tokenData)).toEqual('string');
     });
   });
   describe('when registering a user', () => {
@@ -27,13 +27,13 @@ describe('The AuthenticationSerivie', () => {
           password: 'Trung123!@#',
         };
         (typeorm as any).getRepository.mockReturnValue({
-          findOne: () => Promise.resolve(userData)
+          findOne: () => Promise.resolve(userData),
         });
         const authenticationService = new AuthenticatonService();
         expect(authenticationService.register(userData))
-          .rejects.toMatchObject(new UserWithThatEmailAlreadyExistsException(userData.email))
+          .rejects.toMatchObject(new UserWithThatEmailAlreadyExistsException(userData.email));
       });
-    }); 
+    });
     describe('it the email is not taken', () => {
       it('should not throw an error', async () => {
         const userData: CreateUserDto = {
@@ -55,6 +55,6 @@ describe('The AuthenticationSerivie', () => {
           .resolves.toBeDefined();
       });
     });
-    
+
   });
 });
