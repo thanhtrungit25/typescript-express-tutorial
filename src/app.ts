@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import mongoose from 'mongoose';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 
@@ -40,15 +39,6 @@ class App {
   public getServer() {
     return this.app;
   }
-
-  // private async connectToTheDatabase() {
-  //   await mongoose.connect(process.env.MONGO_PATH, {
-  //     useNewUrlParser: true,
-  //     useUnifiedTopology: true,
-  //     useFindAndModify: false,
-  //     useCreateIndex: true
-  //   });
-  // }
 }
 
 export default App;
