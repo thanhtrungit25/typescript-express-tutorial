@@ -4,7 +4,7 @@ import App from './app';
 import config from './ormconfig';
 import { createConnection } from 'typeorm';
 
-import PostsController from './posts/posts.controller';
+import PostsController from './post/posts.controller';
 import CategoryController from './category/category.controller';
 // import UsersController from './users/user.controller';
 import AuthenticationController from './authentication/authentication.controller';

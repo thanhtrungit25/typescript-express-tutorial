@@ -1,5 +1,5 @@
 import * as typeorm from 'typeorm';
-import CreateUserDto from '../../users/user.dto';
+import CreateUserDto from '../../user/user.dto';
 import TokenData from '../../interfaces/tokenData.interface';
 import AuthenticatonService from '../authentication.service';
 import UserWithThatEmailAlreadyExistsException from '../../exceptions/UserWithThatEmailAlreadyExistsException';

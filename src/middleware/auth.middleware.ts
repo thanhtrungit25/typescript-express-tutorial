@@ -5,7 +5,7 @@ import RequestWithUser from 'interfaces/requestWithUser.interface';
 import WrongAuthenticationTokenException from '../exceptions/WrongAuthenticationTokenException';
 import AuthenticationTokenMissingException from '../exceptions/AuthenticationTokenMissingException';
 import { getRepository } from 'typeorm';
-import User from '../users/user.entity';
+import User from '../user/user.entity';
 
 async function authMiddleware(req: RequestWithUser, res: Response, next: NextFunction) {
   const cookies = req.cookies;

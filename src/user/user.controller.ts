@@ -3,7 +3,7 @@ import NotAuthorizedException from '../exceptions/NotAuthorizedException';
 import UserNotFoundException from '../exceptions/UserNotFoundException';
 import RequestWithUser from '../interfaces/requestWithUser.interface';
 import Controller from '../interfaces/controller.interface';
-import postModel from '../posts/post.model';
+import postModel from '../post/post.model';
 import userModel from './user.model';
 import authMiddleware from '../middleware/auth.middleware';
 
@@ -41,7 +41,7 @@ class UsersController implements Controller {
   private getAllPostsOfUser = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     console.log('req.user', req.user);
     const userId = req.params.id;
-    if (userId === req.user._id.toString()) {
+    if (userId === req.user.id.toString()) {
       const posts = await this.post.find({ author: userId });
       res.send(posts);
     }

@@ -1,5 +1,5 @@
 import * as typeorm from 'typeorm';
-import CreateUserDto from '../../users/user.dto';
+import CreateUserDto from '../../user/user.dto';
 import App from '../../app';
 import AuthenticationController from '../../authentication/authentication.controller';
 import request from 'supertest';

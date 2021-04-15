@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { getRepository } from 'typeorm';
-import CreateUserDto from '../users/user.dto';
-import User from '../users/user.entity';
+import CreateUserDto from '../user/user.dto';
+import User from '../user/user.entity';
 import UserWithThatEmailAlreadyExistsException from '../exceptions/UserWithThatEmailAlreadyExistsException';
 import TokenData from '../interfaces/tokenData.interface';
 import DataStoredInToken from '../interfaces/dataStoredInToken';

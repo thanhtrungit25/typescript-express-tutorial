@@ -3,12 +3,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Controller from '../interfaces/controller.interface';
 import validationMiddleware from '../middleware/validation.middleware';
-import CreateUserDto from '../users/user.dto';
-import LogInDto from '../users/login.dto';
+import CreateUserDto from '../user/user.dto';
+import LogInDto from '../user/login.dto';
 import WrongCredentialException from '../exceptions/WrongCredentialException';
 import TokenData from '../interfaces/tokenData.interface';
 import DataStoredInToken from '../interfaces/dataStoredInToken';
-import User from '../users/user.entity';
+import User from '../user/user.entity';
 import { getRepository } from 'typeorm';
 import AuthenticationService from './authentication.service';
 class AuthenticationController implements Controller {
